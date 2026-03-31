@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "React Mastery",
+    "description": "Learn React step by step",
+    "video": "/video.mp4"
+  },
+  {
+    "id": 2,
+    "title": "Next.js Pro",
+    "description": "Build fullstack apps",
+    "video": "/video.mp4"
+  }
+]

@@ -1,58 +1,28 @@
 "use client";
-import styles from "./CourseCard.module.css";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+
+import { useRouter } from "next/navigation";
 
 export default function CourseCard({ course }) {
-  const [enrolled, setEnrolled] = useState(false);
-
-  // LOAD FROM LOCAL STORAGE
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("enrolledCourses")) || [];
-    if (saved.includes(course.id)) {
-      setEnrolled(true);
-    }
-  }, [course.id]);
-
-  // SAVE TO LOCAL STORAGE
-  const handleEnroll = () => {
-    let saved = JSON.parse(localStorage.getItem("enrolledCourses")) || [];
-
-    if (saved.includes(course.id)) {
-      saved = saved.filter((id) => id !== course.id);
-      setEnrolled(false);
-    } else {
-      saved.push(course.id);
-      setEnrolled(true);
-    }
-
-    localStorage.setItem("enrolledCourses", JSON.stringify(saved));
-  };
+  const router = useRouter();
 
   return (
-    <div className={styles.card}>
-      <h3 className={styles.title}>{course.title}</h3>
-      <p className={styles.desc}>{course.description}</p>
+    <div style={styles.card}>
+      <h3>{course.title}</h3>
+      <p>{course.description}</p>
 
-      <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
-        <Link href={`/courses/${course.id}`}>
-          <button className={styles.btn}>View</button>
-        </Link>
-
-        <button
-          onClick={handleEnroll}
-          style={{
-            background: enrolled ? "green" : "#f59e0b",
-            color: "white",
-            padding: "10px",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer"
-          }}
-        >
-          {enrolled ? "Enrolled ✅" : "Enroll"}
-        </button>
-      </div>
+      <button onClick={() => router.push(`/courses/${course.id}`)}>
+        Start Learning →
+      </button>
     </div>
   );
 }
+
+const styles = {
+  card: {
+    background: "rgba(255,255,255,0.05)",
+    padding: "20px",
+    borderRadius: "15px",
+    color: "white",
+    transition: "0.3s"
+  }
+};
