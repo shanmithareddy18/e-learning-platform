@@ -2,13 +2,31 @@
   {
     "id": 1,
     "title": "React Mastery",
-    "description": "Learn React step by step",
+    "description": "Build modern React apps",
     "video": "/video.mp4"
   },
   {
     "id": 2,
-    "title": "Next.js Pro",
-    "description": "Build fullstack apps",
+    "title": "Next.js Fullstack",
+    "description": "Production apps",
+    "video": "/video.mp4"
+  },
+  {
+    "id": 3,
+    "title": "JavaScript Advanced",
+    "description": "Deep JS concepts",
+    "video": "/video.mp4"
+  },
+  {
+    "id": 4,
+    "title": "UI/UX Design",
+    "description": "Design beautiful UI",
+    "video": "/video.mp4"
+  },
+  {
+    "id": 5,
+    "title": "Python Programming",
+    "description": "Learn Python easily",
     "video": "/video.mp4"
   }
 ]

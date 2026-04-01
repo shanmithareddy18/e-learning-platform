@@ -6,26 +6,47 @@ import courses from "./data/courses.json";
 export default function Home() {
   return (
     <div style={styles.container}>
-      <h1 style={{ textAlign: "center" }}>🚀 Learn Without Limits</h1>
+      
+      {/* HEADER */}
+      <div style={styles.header}>
+        <h1 style={styles.title}>📚 SkillForge Academy</h1>
+        <p style={styles.subtitle}>
+          Master in-demand skills with industry-level courses
+        </p>
+      </div>
 
+      {/* COURSES */}
       <div style={styles.grid}>
         {courses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
       </div>
+
     </div>
   );
 }
 
 const styles = {
   container: {
-    padding: "20px",
-    background: "linear-gradient(135deg,#020617,#0f172a)",
-    minHeight: "100vh"
+    background: "#020617",
+    minHeight: "100vh",
+    padding: "40px"
+  },
+  header: {
+    marginBottom: "30px"
+  },
+  title: {
+    color: "white",
+    fontSize: "32px",
+    fontWeight: "bold"
+  },
+  subtitle: {
+    color: "#9ca3af",
+    marginTop: "5px"
   },
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
+    gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
     gap: "20px"
   }
 };

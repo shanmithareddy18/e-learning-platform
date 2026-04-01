@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const { login } = useAuth();
 
   const handleLogin = () => {
     if (!email.includes("@")) {
@@ -13,43 +15,21 @@ export default function Login() {
       return;
     }
 
-    localStorage.setItem("user", email);
+    login(email);
     router.push("/dashboard");
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.box}>
-        <h2>🔐 Login</h2>
+    <div style={{ padding: "20px", background: "#020617", height: "100vh", color: "white" }}>
+      <h1>🔐 Login</h1>
 
-        <input
-          placeholder="Enter email"
-          onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
-        />
+      <input
+        placeholder="Enter email"
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <button onClick={handleLogin}>Login</button>
-      </div>
+      <br /><br />
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "#020617"
-  },
-  box: {
-    background: "#0f172a",
-    padding: "30px",
-    borderRadius: "10px"
-  },
-  input: {
-    padding: "10px",
-    marginBottom: "10px",
-    width: "100%"
-  }
-};

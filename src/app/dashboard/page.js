@@ -1,39 +1,55 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [courses, setCourses] = useState([]);
-  const router = useRouter();
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      router.push("/login");
-    }
-
-    const data = JSON.parse(localStorage.getItem("courses")) || [];
-    setCourses(data);
+    loadCourses();
   }, []);
 
+  const loadCourses = () => {
+    const stored = JSON.parse(localStorage.getItem("courses")) || [];
+    setCourses(stored);
+  };
+
   return (
-    <div style={{ padding: "20px", background: "#020617", minHeight: "100vh", color: "white" }}>
+    <div style={styles.container}>
       <h1>📊 My Dashboard</h1>
 
-      {courses.length > 0 ? (
-        courses.map((c, i) => (
-          <div key={i} style={{ marginBottom: "15px" }}>
-            <h3>{c.title}</h3>
-
-            <div style={{ background: "#333", height: "8px" }}>
-              <div style={{ width: "40%", background: "#6366f1", height: "8px" }}></div>
-            </div>
-          </div>
-        ))
-      ) : (
+      {courses.length === 0 ? (
         <p>No enrolled courses 😢</p>
+      ) : (
+        <div style={styles.grid}>
+          {courses.map((course) => (
+            <div key={course.id} style={styles.card}>
+              <h3>{course.title}</h3>
+              <p>{course.description}</p>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
 }
+
+const styles = {
+  container: {
+    padding: "30px",
+    background: "#020617",
+    color: "white",
+    minHeight: "100vh"
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "20px",
+    marginTop: "20px"
+  },
+  card: {
+    background: "#0f172a",
+    padding: "20px",
+    borderRadius: "10px"
+  }
+};
